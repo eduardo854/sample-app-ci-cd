@@ -1,0 +1,136 @@
+# -- Number of replicas to deploy
+replicaCount: 1
+
+image:
+  # -- Docker image registry
+  registry: docker.io
+  # -- The path inside the image repository
+  repository: ""
+  # -- Image tag
+  tag: ""
+  # -- Image pull policy to use
+  pullPolicy: IfNotPresent
+
+# -- Image pull secrets to use when pulling the image
+imagePullSecrets: []
+
+# -- Override the Helm chart name
+nameOverride: ""
+
+# -- Override the Helm chart fullname
+fullnameOverride: ""
+
+# -- Annotations applied to the server deployment
+deploymentAnnotations: {}
+
+# -- Annotations applied to the server pod
+podAnnotations: {}
+
+# -- Pod security context
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext:
+  # -- Allow privilege escalation
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  # -- Run as a non-privileged user
+  privileged: false
+  readOnlyRootFilesystem: false
+  runAsGroup: 1001
+  runAsNonRoot: true
+  runAsUser: 1001
+
+# -- Service configuration to expose the server
+service:
+  # -- Service type
+  type: ClusterIP
+  # -- Port where the server will be exposed
+  port: 8080
+  internalPort: 80
+
+resources: {}
+# We usually recommend not to specify default resources and to leave this as a conscious
+# choice for the user. This also increases chances charts run on environments with little
+# resources, such as Minikube. If you do want to specify resources, uncomment the following
+# lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
+
+# -- Node selector for the pod
+nodeSelector: {}
+
+# -- Pod tolerations
+tolerations: []
+
+# -- Pod affinity
+affinity: {}
+
+# Readiness Probe Configuration
+readinessProbe:
+  # Number of consecutive failures required to consider the container not ready
+  failureThreshold: 5
+  # Initial delay before the probe is executed (in seconds)
+  initialDelaySeconds: 30
+  # How often the probe is performed (in seconds)
+  periodSeconds: 20
+  # Number of consecutive successes required to consider the container ready
+  successThreshold: 1
+  # Maximum time for the probe to complete (in seconds)
+  timeoutSeconds: 20
+  # Path that the probe will access to determine readiness
+  path: "/"
+
+# Startup Probe Configuration
+startupProbe:
+  # Number of consecutive failures required to consider the container not started successfully
+  failureThreshold: 10
+  # Initial delay before the probe is executed (in seconds)
+  initialDelaySeconds: 30
+  # How often the probe is performed (in seconds)
+  periodSeconds: 30
+  # Number of consecutive successes required to consider the container started successfully
+  successThreshold: 1
+  # Maximum time for the probe to complete (in seconds)
+  timeoutSeconds: 30
+  # Path that the probe will access during startup
+  path: "/"
+
+# Liveness Probe Configuration
+livenessProbe:
+  # Number of consecutive failures required to consider the container not live
+  failureThreshold: 5
+  # Initial delay before the probe is executed (in seconds)
+  initialDelaySeconds: 30
+  # How often the probe is performed (in seconds)
+  periodSeconds: 20
+  # Number of consecutive successes required to consider the container live
+  successThreshold: 1
+  # Maximum time for the probe to complete (in seconds)
+  timeoutSeconds: 30
+  # Path that the probe will access to determine liveness
+  path: "/"
+
+
+# -- Pod topology spread configuration
+# see: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api
+topologySpreadConstraints: []
+
+# -- Extra environment variables to set on the server container
+extraEnv: []
+
+podDisruptionBudget:
+  # -- Enable PodDisruptionBudget for the server pods (requires k8s 1.21+)
+  enabled: false
+  # -- Minimum available instances
+  minAvailable: 1
+  # -- Maximum unavailable instances
+  maxUnavailable: ""
+
+env: []

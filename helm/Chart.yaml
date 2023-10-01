@@ -1,0 +1,9 @@
+apiVersion: v2
+name: sample-app-ci-cd
+description:  A Helm chart for deploying the sample-app-ci-cd on Kubernetes. 
+home: https://github.com/eduardo854/sample-app-ci-cd
+sources:
+  - https://github.com/eduardo854/sample-app-ci-cd
+type: application
+version: 0.0.0
+appVersion: 0.0.0
