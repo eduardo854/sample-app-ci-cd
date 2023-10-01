@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./docker/actions/Dockerfile
+          file: ./Dockerfile
           push: true
           tags: >
             docker.io/${{ secrets.DOCKER_USERNAME }}/${{ steps.extract-repository-name.outputs.REPO_NAME }}:${{ steps.docker-image.outputs.IMAGE_NAME }}
