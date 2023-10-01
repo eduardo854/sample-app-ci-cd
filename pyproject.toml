@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "sample-app-ci-cd"
+version = "0.1.0"
+description = "Building a GitOps structure with GitHub, Actions, DockerHub, and Helm Repository"
+authors = ["Eduardo Fernandes de Souza <eduardo854@gmail.com>"]
+license = "MIT License"
+readme = "README.md"
+packages = [{include = "sample_app_ci_cd"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.103.1"
+uvicorn = "^0.23.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
