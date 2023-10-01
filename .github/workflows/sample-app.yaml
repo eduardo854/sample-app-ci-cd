@@ -22,12 +22,12 @@ jobs:
         run: |
             BRANCH_NAME=${{ github.ref_name }}
             IMAGE_NAME=${BRANCH_NAME}_${{ github.sha }}
-            echo "{IMAGE_NAME}={IMAGE_NAME}" >> $GITHUB_OUTPUT
+            echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_OUTPUT
       - name: Extract repository name
         id: extract-repository-name
         run: |
             REPO_NAME=$(echo "${{ github.repository }}" | cut -d '/' -f 2)
-            echo "{REPO_NAME}={REPO_NAME}" >> $GITHUB_OUTPUT
+            echo "REPO_NAME=${REPO_NAME}" >> $GITHUB_OUTPUT
       - name: Login to Docker registry
         uses: docker/login-action@v1
         with:
