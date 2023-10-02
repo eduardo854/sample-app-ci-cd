@@ -68,5 +68,5 @@ jobs:
         uses: azure/setup-helm@v1
       - name: Package Helm Chart
         run: |
-          helm package ./${{ steps.extract-repository-name.outputs.REPO_NAME }}
-          helm repo index ./${{ steps.extract-repository-name.outputs.REPO_NAME }} --url ${{ vars.URL_HELM_REPOSITORY }}
+          helm package ./${{ vars.NAME_HELM_FOLDER }}
+          helm repo index ./${{ vars.NAME_HELM_FOLDER }} --url ${{ vars.URL_HELM_REPOSITORY }}
