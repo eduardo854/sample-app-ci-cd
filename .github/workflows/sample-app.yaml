@@ -54,7 +54,16 @@ jobs:
         uses: mikefarah/yq@v4.35.2
       - name: Update Yaml Files
         run: |
-          ls
+          helm_folder="${{ vars.NAME_HELM_FOLDER }}"
+          version_helm="$(cat VERSION_HELM)"
+          run_number="${{ github.run_number }}"
+          image_name="${{ steps.docker-image.outputs.IMAGE_NAME }}"
+          image_digest="${{ steps.image-digest.outputs.IMAGE_DIGEST }}"
+          
+          yq -i ".version = \"${version_helm}.${run_number}\"" "./${helm_folder}/Chart.yaml"
+          yq -i ".appVersion = \"$(cat VERSION)\"" "./${helm_folder}/Chart.yaml"
+          
+          yq -i '.image.tag = "'"${image_name}@${image_digest}"'"' "./${helm_folder}/values.yaml"
       - name: Set up Helm
         uses: azure/setup-helm@v1
       - name: Package Helm Chart
