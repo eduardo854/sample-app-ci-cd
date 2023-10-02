@@ -55,13 +55,13 @@ jobs:
       - name: Update Yaml Files
         run: >
           yq -i ".version = \"$(cat VERSION_HELM).${{ github.run_number }}\""
-          ./${{ steps.extract-repository-name.outputs.REPO_NAME }}/${{ env.NAME_HELM_FOLDER }}/Chart.yaml
-          yq -i ".appVersion = \"$(cat VERSION)\"" ./${{ steps.extract-repository-name.outputs.REPO_NAME }}/${{ env.NAME_HELM_FOLDER }}/Chart.yaml
+          ./${{ steps.extract-repository-name.outputs.REPO_NAME }}/${{ vars.NAME_HELM_FOLDER }}/Chart.yaml
+          yq -i ".appVersion = \"$(cat VERSION)\"" ./${{ steps.extract-repository-name.outputs.REPO_NAME }}/${{ vars.NAME_HELM_FOLDER }}/Chart.yaml
           yq -i '.image.tag = "'"${{ steps.docker-image.outputs.IMAGE_NAME }}@
-          ${{ steps.image-digest.outputs.IMAGE_DIGEST }}"'"' ./${{ steps.extract-repository-name.outputs.REPO_NAME }}/${{ env.NAME_HELM_FOLDER }}/values.yaml
+          ${{ steps.image-digest.outputs.IMAGE_DIGEST }}"'"' ./${{ steps.extract-repository-name.outputs.REPO_NAME }}/${{ vars.NAME_HELM_FOLDER }}/values.yaml
       - name: Set up Helm
         uses: azure/setup-helm@v1
       - name: Package Helm Chart
         run: >
           helm package ./${{ steps.extract-repository-name.outputs.REPO_NAME }}
-          helm repo index ./${{ steps.extract-repository-name.outputs.REPO_NAME }} --url ${{ env.URL_HELM_REPOSITORY }}
+          helm repo index ./${{ steps.extract-repository-name.outputs.REPO_NAME }} --url ${{ vars.URL_HELM_REPOSITORY }}
