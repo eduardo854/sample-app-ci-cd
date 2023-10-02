@@ -54,6 +54,7 @@ jobs:
         uses: mikefarah/yq@v4.35.2
       - name: Update Yaml Files
         run: >
+          ls
           yq -i ".version = \"$(cat VERSION_HELM).${{ github.run_number }}\""
           ./${{ steps.extract-repository-name.outputs.REPO_NAME }}/${{ vars.NAME_HELM_FOLDER }}/Chart.yaml
           yq -i ".appVersion = \"$(cat VERSION)\"" ./${{ steps.extract-repository-name.outputs.REPO_NAME }}/${{ vars.NAME_HELM_FOLDER }}/Chart.yaml
