@@ -72,3 +72,7 @@ jobs:
         run: |
           helm package ./${{ vars.NAME_HELM_FOLDER }}
           helm repo index ./${{ vars.NAME_HELM_FOLDER }} --url ${{ vars.URL_HELM_REPOSITORY }}
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
