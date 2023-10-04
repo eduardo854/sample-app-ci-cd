@@ -90,7 +90,7 @@ jobs:
       - name: Commit and Push Changes
         run: |
           cd helm-store/
-          git pull origin master
+          git pull origin head
           git add .
           git commit -m "teste1"
-          git push origin master
+          git push origin head
