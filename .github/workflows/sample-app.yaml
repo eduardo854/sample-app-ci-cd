@@ -72,7 +72,25 @@ jobs:
         run: |
           helm package ./${{ vars.NAME_HELM_FOLDER }}
           helm repo index ./${{ vars.NAME_HELM_FOLDER }} --url ${{ vars.URL_HELM_REPOSITORY }}
-      - name: Configure Git
+      - name: Configure Git 
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Clone Helm Chart Repo
+        uses: actions/checkout@v3
+        with:
+          repository: eduardo854/helm-store
+          ref: main
+          path: ./helm-store
+      - name: Copy Chart Package
+        run: |
+          mkdir -p helm-store/temp/sample-app-ci-cd
+          cp *.tgz helm-store/temp/sample-app-ci-cd/
+      - name: Commit and Push Changes
+        run: |
+          cd helm-store/
+          git pull origin master
+          git add .
+          git commit -m "teste1"
+          git push origin master
