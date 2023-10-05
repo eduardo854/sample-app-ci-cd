@@ -83,7 +83,7 @@ jobs:
         run: |
           mkdir -p helm-store/app/${{ steps.extract-repository-name.outputs.REPO_NAME }}
           cp *.tgz helm-store/app/${{ steps.extract-repository-name.outputs.REPO_NAME }}/
-      - name: Commit and Push Changes
+      - name: Commit and Push Changes 
         run: |
           cd helm-store/
           git config user.name "$GITHUB_ACTOR"
