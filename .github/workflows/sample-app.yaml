@@ -76,19 +76,19 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: eduardo854/helm-store
-          ref: develop
+          ref: stage
           token: '${{ secrets.TOKEN_HELM_STORE }}'
           path: ./helm-store
       - name: Copy Chart Package
         run: |
-          mkdir -p helm-store/temp/sample-app-ci-cd
-          cp *.tgz helm-store/temp/sample-app-ci-cd/
+          mkdir -p helm-store/app/${{ steps.extract-repository-name.outputs.REPO_NAME }}
+          cp *.tgz helm-store/app/${{ steps.extract-repository-name.outputs.REPO_NAME }}/
       - name: Commit and Push Changes
         run: |
           cd helm-store/
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-          git pull origin develop
+          git pull origin stage
           git add .
-          git commit -m "teste1"
-          git push origin develop
+          git commit -m "${{ github.ref_name }}"
+          git push origin stage
