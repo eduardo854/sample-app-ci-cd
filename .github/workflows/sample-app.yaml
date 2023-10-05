@@ -83,7 +83,7 @@ jobs:
         run: |
           mkdir -p helm-store/temp/sample-app-ci-cd
           cp *.tgz helm-store/temp/sample-app-ci-cd/
-      - name: Commit and Push Changes 
+      - name: Commit and Push Changes
         run: |
           cd helm-store/
           git config user.name "$GITHUB_ACTOR"
