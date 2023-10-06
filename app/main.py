@@ -2,6 +2,9 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+@app.get("/")
+def status():
+    return {"status": "ok"}
 
 @app.get("/about")
 def read_root():
