@@ -75,7 +75,7 @@ jobs:
       - name: Clone Helm Chart Repo
         uses: actions/checkout@v3
         with:
-          repository: eduardo854/helm-store
+          repository: eduardo854/helm-store 
           ref: develop # change to stage 
           token: '${{ secrets.TOKEN_HELM_STORE }}'
           path: ./helm-store
