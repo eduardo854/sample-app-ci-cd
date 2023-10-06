@@ -46,7 +46,7 @@ jobs:
       - name: Extract Image sha256
         id: image-digest
         run: |
-          IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "${{ github.repository_owner }}/${{ steps.extract-repository-name.outputs.REPO_NAME }}:${{ steps.docker-image.outputs.IMAGE_NAME }}" | cut -d "@" -f 2)
+          IMAGE_DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' "${{ secrets.DOCKER_USERNAME }}/${{ steps.extract-repository-name.outputs.REPO_NAME }}:${{ steps.docker-image.outputs.IMAGE_NAME }}" | cut -d "@" -f 2)
           echo "IMAGE_DIGEST=${IMAGE_DIGEST}" >> $GITHUB_OUTPUT
       - name: Setup yq portable command-line YAML, JSON, XML, CSV, TOML and properties processor
         uses: mikefarah/yq@v4.35.2
