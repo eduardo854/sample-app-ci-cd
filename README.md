@@ -6,6 +6,14 @@ The purpose of this example application is to showcase the entire GitOps infrast
 
 By exploring this example, you can gain insights into how to set up a robust CI/CD pipeline and efficiently manage Kubernetes deployments using GitOps principles. Feel free to use this example as a reference for your own CI/CD projects and Kubernetes deployments.
 
+## Architecture
+
+![architecture](/docs/diagram.png)
+
+To edit this diagram, you can simply open it on https://excalidraw.com/.
+
+## About Me
+
 Repository containing my posts on [MEDIUM](https://medium.com/@eduardo854).
 
 To be notified every time a new post is published, **SUBSCRIBE [HERE](https://medium.com/@eduardo854/subscribe)**.
